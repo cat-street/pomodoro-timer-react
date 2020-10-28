@@ -7,11 +7,12 @@ import './App.css';
 
 function App() {
   const [length, setLength] = useState({
-    length: 1500,
-    timer: 1500,
+    length: 5,
+    timer: 5,
   });
-  const [breakLength, setBreakLength] = useState(300);
+  const [breakLength, setBreakLength] = useState(3);
   const [runningId, setRunningId] = useState(0);
+  const [breakRunning, setBreakRunning] = useState(false);
 
   const INCREASE = 'INCREASE';
   const DECREASE = 'DECREASE';
@@ -44,6 +45,12 @@ function App() {
     }
   };
 
+  const switchTimer = () => {
+    console.log('DONE!');
+    setBreakRunning(!breakRunning);
+    return length.length;
+  }
+
   const startTimer = () => {
     let timer = length.timer;
     if (!runningId) {
@@ -53,6 +60,9 @@ function App() {
           length: length.length,
           timer: timer,
         });
+        if (timer === 0) {
+          timer = switchTimer();
+        }
       }, 1000);
       setRunningId(timeoutId);
     } else {
