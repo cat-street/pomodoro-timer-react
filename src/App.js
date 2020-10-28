@@ -8,18 +8,20 @@ import './App.css';
 function App() {
   const [length, setLength] = useState({
     length: 1500,
-    timer: 1500
+    timer: 1500,
   });
   const [breakLength, setBreakLength] = useState(300);
+  const [runningId, setRunningId] = useState(0);
 
   const INCREASE = 'INCREASE';
   const DECREASE = 'DECREASE';
+  let timer = length.timer;
 
   const changeLength = (modificator) => {
     const change = changeTime(modificator, length.length);
     setLength({
       length: change,
-      timer: change
+      timer: change,
     });
   };
 
@@ -42,14 +44,20 @@ function App() {
   };
 
   let startTimer = () => {
-    setTimeout(function start() {
-      setLength({
-        length: length.length,
-        timer: length.timer - 60
-      });
-      startTimer = setTimeout(start, 1000);
-    }, 1000);
-  }
+    if (!runningId) {
+      let timeoutId = setInterval(() => {
+        timer -= 1;
+        setLength({
+          length: length.length,
+          timer: timer,
+        });
+      }, 1000);
+      setRunningId(timeoutId);
+    } else {
+      clearInterval(runningId);
+      setRunningId(0);
+    }
+  };
 
   return (
     <div className="timer">

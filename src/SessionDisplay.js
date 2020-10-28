@@ -1,7 +1,7 @@
 import './SessionDisplay.css';
 
 export const SessionDisplay = ({ time, onChange, modificator }) => {
-  const {INCREASE, DECREASE} = modificator;
+  const { INCREASE, DECREASE } = modificator;
 
   return (
     <div className="timer__session-display">
