@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { BreakDisplay } from './BreakDisplay';
 import { SessionDisplay } from './SessionDisplay';
 import { TimerDisplay } from './TimerDisplay';
@@ -15,9 +15,9 @@ function App() {
 
   const INCREASE = 'INCREASE';
   const DECREASE = 'DECREASE';
-  let timer = length.timer;
 
   const changeLength = (modificator) => {
+    if (runningId) return;
     const change = changeTime(modificator, length.length);
     setLength({
       length: change,
@@ -26,6 +26,7 @@ function App() {
   };
 
   const changeBreak = (modificator) => {
+    if (runningId) return;
     setBreakLength(changeTime(modificator, breakLength));
   };
 
@@ -43,9 +44,10 @@ function App() {
     }
   };
 
-  let startTimer = () => {
+  const startTimer = () => {
+    let timer = length.timer;
     if (!runningId) {
-      let timeoutId = setInterval(() => {
+      const timeoutId = setInterval(() => {
         timer -= 1;
         setLength({
           length: length.length,
@@ -58,6 +60,18 @@ function App() {
       setRunningId(0);
     }
   };
+
+  const reset = useCallback(() => {
+    if (runningId) {
+      clearInterval(runningId);
+      setRunningId(0);
+    }
+    setLength({
+      length: 1500,
+      timer: 1500,
+    });
+    setBreakLength(300);
+  }, [runningId]);
 
   return (
     <div className="timer">
@@ -74,7 +88,7 @@ function App() {
         />
       </div>
       <TimerDisplay time={length.timer} />
-      <TimerButtons onStart={startTimer} />
+      <TimerButtons onStart={startTimer} onReset={reset} />
     </div>
   );
 }
