@@ -13,8 +13,6 @@ export const BreakDisplay = ({ time, onChange, modificator }) => {
         name="break-length"
         id="break-length"
         className="timer__break-length"
-        min="1"
-        max="60"
         value={time / 60}
         readOnly
       />

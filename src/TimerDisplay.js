@@ -1,6 +1,6 @@
 import './TimerDisplay.css';
 
-export const TimerDisplay = ({ time }) => {
+export const TimerDisplay = ({ time, stage }) => {
   const formatTime = () => {
     let minutes = Math.floor(time / 60).toString();
     let seconds = (time % 60).toString();
@@ -22,16 +22,14 @@ export const TimerDisplay = ({ time }) => {
   return (
     <div className="timer__display">
       <label htmlFor="time-left" id="timer-label">
-        Session
+        {stage}
       </label>
-      <input
-        type="text"
-        name="time-left"
+      <div
         id="time-left"
         className="timer__time-left"
-        value={formatTime()}
-        readOnly
-      ></input>
+      >
+        {formatTime()}
+      </div>
     </div>
   );
 };

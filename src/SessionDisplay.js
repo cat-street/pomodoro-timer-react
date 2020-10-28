@@ -17,8 +17,6 @@ export const SessionDisplay = ({ time, onChange, modificator }) => {
         name="session-length"
         id="session-length"
         className="timer__session-length"
-        min="1"
-        max="60"
         value={time / 60}
         readOnly
       />
@@ -34,7 +32,7 @@ export const SessionDisplay = ({ time, onChange, modificator }) => {
         type="button"
         id="session-increment"
         className="button button_type_small"
-        onMouseDown={() => onChange(INCREASE)}
+        onClick={() => onChange(INCREASE)}
       >
         ^
       </button>

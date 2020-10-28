@@ -5,7 +5,7 @@ export const TimerButtons = ({ onStart, onReset }) => {
     <div className="timer__buttons">
       <button
         type="button"
-        id="start-stop"
+        id="start_stop"
         className="button button_type_big"
         onClick={onStart}
       >

@@ -8,17 +8,18 @@ import './App.css';
 
 function App() {
   const [length, setLength] = useState({
-    length: 5,
-    timer: 5,
+    length: 1500,
+    timer: 1500,
   });
   const [breakLength, setBreakLength] = useState(300);
   const [runningId, setRunningId] = useState(0);
+  const [stage, setStage] = useState('Session');
 
   const audioSignal = useRef();
+  let breakRunning = useRef(false);
 
   const INCREASE = 'INCREASE';
   const DECREASE = 'DECREASE';
-  let breakRunning = false;
 
   const changeLength = (modificator) => {
     if (runningId) return;
@@ -48,19 +49,22 @@ function App() {
     }
   };
 
-  const switchTimer = () => {
+  const switchTimer = useCallback(() => {
     let time;
-    if (!breakRunning) {
+    if (!breakRunning.current) {
+      setStage('Break');
       time = breakLength + 1;
     } else {
+      setStage('Session');
       time = length.length + 1;
     }
-    breakRunning = !breakRunning;
+    breakRunning.current = !breakRunning.current;
     return time;
-  }
+  }, [breakLength, length.length]);
 
-  const startTimer = () => {
+  const startTimer = useCallback(() => {
     let timer = length.timer;
+
     if (!runningId) {
       const timeoutId = setInterval(() => {
         timer -= 1;
@@ -68,9 +72,10 @@ function App() {
           length: length.length,
           timer: timer,
         });
+
         if (timer === 0) {
-          audioSignal.current.play();
           timer = switchTimer();
+          audioSignal.current.play();
         }
       }, 1000);
       setRunningId(timeoutId);
@@ -78,11 +83,12 @@ function App() {
       clearInterval(runningId);
       setRunningId(0);
     }
-  };
+  }, [length.length, length.timer, runningId, switchTimer]);
 
   const reset = useCallback(() => {
     audioSignal.current.currentTime = 0;
     audioSignal.current.pause();
+
     if (runningId) {
       clearInterval(runningId);
       setRunningId(0);
@@ -92,6 +98,7 @@ function App() {
       timer: 1500,
     });
     setBreakLength(300);
+    setStage('Session');
   }, [runningId, audioSignal]);
 
   return (
@@ -109,7 +116,7 @@ function App() {
           modificator={{ INCREASE, DECREASE }}
         />
       </div>
-      <TimerDisplay time={length.timer} />
+      <TimerDisplay time={length.timer} stage={stage} />
       <TimerButtons onStart={startTimer} onReset={reset} />
     </div>
   );
