@@ -2,11 +2,21 @@ import './TimerDisplay.css';
 
 export const TimerDisplay = ({ time }) => {
   const formatTime = () => {
+    let minutes = Math.floor(time / 60).toString();
     let seconds = (time % 60).toString();
-    if (seconds.length === 1) {
-      seconds = '0' + seconds;
+
+    const formatTime = (val) => {
+      if (val.length === 1) {
+        return '0' + val;
+      } else {
+        return val;
+      }
     }
-    return (Math.floor(time / 60)) + ':' + seconds;
+
+    minutes = formatTime(minutes);
+    seconds = formatTime(seconds);
+
+    return minutes + ':' + seconds;
   }
 
   return (

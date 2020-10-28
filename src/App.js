@@ -1,8 +1,9 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { BreakDisplay } from './BreakDisplay';
 import { SessionDisplay } from './SessionDisplay';
 import { TimerDisplay } from './TimerDisplay';
 import { TimerButtons } from './TimerButtons';
+import audio from './assets/audio.mp3';
 import './App.css';
 
 function App() {
@@ -10,12 +11,14 @@ function App() {
     length: 5,
     timer: 5,
   });
-  const [breakLength, setBreakLength] = useState(3);
+  const [breakLength, setBreakLength] = useState(300);
   const [runningId, setRunningId] = useState(0);
-  const [breakRunning, setBreakRunning] = useState(false);
+
+  const audioSignal = useRef();
 
   const INCREASE = 'INCREASE';
   const DECREASE = 'DECREASE';
+  let breakRunning = false;
 
   const changeLength = (modificator) => {
     if (runningId) return;
@@ -46,9 +49,14 @@ function App() {
   };
 
   const switchTimer = () => {
-    console.log('DONE!');
-    setBreakRunning(!breakRunning);
-    return length.length;
+    let time;
+    if (!breakRunning) {
+      time = breakLength + 1;
+    } else {
+      time = length.length + 1;
+    }
+    breakRunning = !breakRunning;
+    return time;
   }
 
   const startTimer = () => {
@@ -61,6 +69,7 @@ function App() {
           timer: timer,
         });
         if (timer === 0) {
+          audioSignal.current.play();
           timer = switchTimer();
         }
       }, 1000);
@@ -72,6 +81,8 @@ function App() {
   };
 
   const reset = useCallback(() => {
+    audioSignal.current.currentTime = 0;
+    audioSignal.current.pause();
     if (runningId) {
       clearInterval(runningId);
       setRunningId(0);
@@ -81,10 +92,11 @@ function App() {
       timer: 1500,
     });
     setBreakLength(300);
-  }, [runningId]);
+  }, [runningId, audioSignal]);
 
   return (
     <div className="timer">
+      <audio id="beep" ref={audioSignal} src={audio}></audio>
       <div className="timer__upper">
         <BreakDisplay
           time={breakLength}
