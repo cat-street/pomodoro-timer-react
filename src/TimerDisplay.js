@@ -11,23 +11,18 @@ export const TimerDisplay = ({ time, stage }) => {
       } else {
         return val;
       }
-    }
+    };
 
     minutes = formatTime(minutes);
     seconds = formatTime(seconds);
 
     return minutes + ':' + seconds;
-  }
+  };
 
   return (
     <div className="timer__display">
-      <label htmlFor="time-left" id="timer-label">
-        {stage}
-      </label>
-      <div
-        id="time-left"
-        className="timer__time-left"
-      >
+      <p id="timer-label">{stage}</p>
+      <div id="time-left" className="timer__time-left">
         {formatTime()}
       </div>
     </div>
