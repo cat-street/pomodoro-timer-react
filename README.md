@@ -1,4 +1,4 @@
-# Catlogic Pomodoro Timer
+# CatLogic Pomodoro Timer
 **Self-study React Project**
 
 ![Timer Preview](./pomodoro_gh.png)
