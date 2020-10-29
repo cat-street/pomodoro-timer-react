@@ -4,6 +4,10 @@
   width: 50vmin;
   height: 50vmin;
 
+  position: relative;
+
+  overflow: hidden;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,6 +19,32 @@
   border-radius: 50%;
 
   font-family: 'Teko', sans-serif;
+
+  box-shadow: 0 0 1px 2px black,
+    0 0 1px 8px #f1f1f1,
+    0 0 2px 10px rgba(0, 0, 0, .4),
+    4px 4px 2px 14px rgba(0, 0, 0, .6),
+    0 0 1px 14px #f1f1f1,
+    0 0 1px 15px rgba(0, 0, 0, .8),
+    0 0 1px 16px rgba(255, 255, 255, .6),
+    0 0 1px 17px black;
+}
+
+.timer::before {
+  content: '';
+
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: 1vmin;
+  right: 1vmin;
+
+  background: linear-gradient(40deg, #000 60%,#e1e1e1 95%);
+  box-shadow: 0 0 4px 0 rgba(255, 255, 255, .8),
+    0 0 6px 0 rgba(255, 255, 255, .6),
+    0 0 8px 0 rgba(255, 255, 255, .4);
+
+  border-radius: 50%;
 }
 
 .timer__top {
@@ -24,6 +54,8 @@
   margin-top: 3vmin;
 
   font-size: clamp(1.3rem, 2.5vmin, 2.5vmin);
+
+  z-index: 1;
 }
 
 .timer__small-value {

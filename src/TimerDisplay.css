@@ -1,3 +1,7 @@
+.timer__display {
+  z-index: 1;
+}
+
 .timer__label {
   margin: 2vmin 0 .2vmin;
 

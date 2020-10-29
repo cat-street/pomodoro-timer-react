@@ -9,7 +9,9 @@
   align-items: center;
   justify-content: center;
 
-  background-image: linear-gradient(to top, #dddddd 0%, #8685a8 100%);
+  background-image: radial-gradient(circle at center, #252525 0% 29vmin,
+    #434343 30vmin, #323232 35vmin, #434343 36vmin, #323232 41vmin,
+    #434343 42vmin, #323232 100%);
   background-attachment: fixed;
 
   -webkit-font-smoothing: antialiased;
