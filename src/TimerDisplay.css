@@ -1,0 +1,12 @@
+.timer__label {
+  margin: 2vmin 0 .2vmin;
+
+  text-align: center;
+  font-size: clamp(2rem, 4.5vmin, 4.5vmin);
+}
+
+.timer__time-left {
+  font-family: 'Digital Numbers Regular', sans-serif;
+  font-size: clamp(4rem, 8vmin, 8vmin);
+  letter-spacing: -.6rem;
+}

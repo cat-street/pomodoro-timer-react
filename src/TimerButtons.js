@@ -1,6 +1,7 @@
 import './TimerButtons.css';
 
-export const TimerButtons = ({ onStart, onReset }) => {
+export const TimerButtons = ({ onStart, onReset, resetSymbol, playSymbol }) => {
+
   return (
     <div className="timer__buttons">
       <button
@@ -9,7 +10,7 @@ export const TimerButtons = ({ onStart, onReset }) => {
         className="button button_type_big"
         onClick={onStart}
       >
-        &gt;
+        {playSymbol}
       </button>
       <button
         type="button"
@@ -17,7 +18,7 @@ export const TimerButtons = ({ onStart, onReset }) => {
         className="button button_type_big"
         onClick={onReset}
       >
-        @
+        {resetSymbol}
       </button>
     </div>
   );

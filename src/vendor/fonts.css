@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Digital Numbers Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Digital Numbers Regular'), url('./fonts/DigitalNumbers-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Teko';
+  src: url('./fonts/teko-regular-webfont.woff2') format('woff2'),
+    url('./fonts/teko-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

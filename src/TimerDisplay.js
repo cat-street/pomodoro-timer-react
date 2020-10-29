@@ -21,7 +21,7 @@ export const TimerDisplay = ({ time, stage }) => {
 
   return (
     <div className="timer__display">
-      <p id="timer-label">{stage}</p>
+      <p id="timer-label" className="timer__label">{stage}</p>
       <div id="time-left" className="timer__time-left">
         {formatTime()}
       </div>

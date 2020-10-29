@@ -1,0 +1,15 @@
+.timer__buttons {
+  display: flex;
+  margin-top: 2vmin;
+}
+
+.button_type_big {
+  width: 5vmin;
+  height: 5vmin;
+  min-width: 2.6rem;
+  min-height: 2.6rem;
+
+  margin: 0 .5vmin;
+
+  font-size: 1.3rem;
+}

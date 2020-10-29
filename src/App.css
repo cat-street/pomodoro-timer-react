@@ -1,0 +1,87 @@
+.timer {
+  min-width: 285px;
+  min-height: 285px;
+  width: 50vmin;
+  height: 50vmin;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: black;
+  color: white;
+
+  border-radius: 50%;
+
+  font-family: 'Teko', sans-serif;
+}
+
+.timer__top {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 3vmin;
+
+  font-size: clamp(1.3rem, 2.5vmin, 2.5vmin);
+}
+
+.timer__small-value {
+  font-family: 'Digital Numbers Regular', sans-serif;
+  text-align: center;
+
+  display: block;
+
+  min-width: 5vmin;
+}
+
+.timer__small-section {
+  margin: 0 2vmin;
+}
+
+.timer__small-label {
+  margin: .2vmin 0;
+  text-align: center;
+}
+
+.timer__small-display {
+  display: flex;
+  justify-content: space-between;
+
+  letter-spacing: -.2vmin;
+}
+
+.button {
+  border: 2px solid rgba(255, 255, 255, .5);
+  border-radius: 50%;
+  outline: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
+  color: white;
+  opacity: .5;
+
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.button:hover,
+.button:focus {
+  opacity: 1;
+
+  box-shadow: 0 0 2px 0 rgba(255, 255, 255, .9),
+              0 0 4px 0 rgba(255, 255, 255, .4),
+              0 0 6px 0 rgba(255, 255, 255, .2);
+}
+
+.button_type_small {
+  width: 3vmin;
+  height: 3vmin;
+  min-width: 1.6rem;
+  min-height: 1.6rem;
+
+  font-size: 1rem;
+}

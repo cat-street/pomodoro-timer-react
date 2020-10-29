@@ -1,37 +1,33 @@
-import './BreakDisplay.css';
-
-export const BreakDisplay = ({ time, onChange, modificator }) => {
-  const {INCREASE, DECREASE} = modificator;
+export const BreakDisplay = ({ time, onChange, modificator, buttons }) => {
+  const { INCREASE, DECREASE } = modificator;
+  const { chevronUp, chevronDown } = buttons;
 
   return (
-    <div className="timer__break-display">
-      <label htmlFor="break-length" id="break-label" className="timer__break-label">
+    <div className="timer__small-section">
+      <p id="break-label" className="timer__small-label">
         Break Length
-      </label>
-      <input
-        type="number"
-        name="break-length"
-        id="break-length"
-        className="timer__break-length"
-        value={time / 60}
-        readOnly
-      />
-      <button
-        type="button"
-        id="break-decrement"
-        className="button button_type_small"
-        onClick={() => onChange(DECREASE)}
-      >
-        v
-      </button>
-      <button
-        type="button"
-        id="break-increment"
-        className="button button_type_small"
-        onClick={() => onChange(INCREASE)}
-      >
-        ^
-      </button>
+      </p>
+      <div id="break-length" className="timer__small-display">
+        <button
+          type="button"
+          id="break-decrement"
+          className="button button_type_small"
+          onClick={() => onChange(DECREASE)}
+        >
+          {chevronDown}
+        </button>
+        <span className="timer__small-value">
+          {time / 60}
+        </span>
+        <button
+          type="button"
+          id="break-increment"
+          className="button button_type_small"
+          onClick={() => onChange(INCREASE)}
+        >
+          {chevronUp}
+        </button>
+      </div>
     </div>
   );
 };

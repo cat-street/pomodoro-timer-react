@@ -3,8 +3,17 @@ import { BreakDisplay } from './BreakDisplay';
 import { SessionDisplay } from './SessionDisplay';
 import { TimerDisplay } from './TimerDisplay';
 import { TimerButtons } from './TimerButtons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronUp,
+  faChevronDown,
+  faUndoAlt,
+  faPlay,
+  faPause,
+} from '@fortawesome/free-solid-svg-icons';
 import audio from './assets/audio.mp3';
 import './App.css';
+import './vendor/fonts.css';
 
 function App() {
   const [length, setLength] = useState({
@@ -20,6 +29,12 @@ function App() {
 
   const INCREASE = 'INCREASE';
   const DECREASE = 'DECREASE';
+
+  const chevronUp = <FontAwesomeIcon icon={faChevronUp} />;
+  const chevronDown = <FontAwesomeIcon icon={faChevronDown} />;
+  const resetSymbol = <FontAwesomeIcon icon={faUndoAlt} />;
+  const playSymbol = <FontAwesomeIcon icon={faPlay} />;
+  const pauseSymbol = <FontAwesomeIcon icon={faPause} />;
 
   const changeLength = (modificator) => {
     if (runningId) return;
@@ -62,7 +77,9 @@ function App() {
     return time;
   }, [breakLength, length.length]);
 
-  const startTimer = useCallback(() => {
+  const startTimer = useCallback((evt) => {
+    evt.target.closest('.button').blur();
+
     let timer = length.timer;
 
     if (!runningId) {
@@ -85,7 +102,9 @@ function App() {
     }
   }, [length, runningId, switchTimer]);
 
-  const reset = useCallback(() => {
+  const reset = useCallback((evt) => {
+    evt.target.closest('.button').blur();
+
     audioSignal.current.currentTime = 0;
     audioSignal.current.pause();
 
@@ -104,20 +123,27 @@ function App() {
   return (
     <div className="timer">
       <audio id="beep" ref={audioSignal} src={audio}></audio>
-      <div className="timer__upper">
+      <div className="timer__top">
         <BreakDisplay
           time={breakLength}
           onChange={changeBreak}
           modificator={{ INCREASE, DECREASE }}
+          buttons={{ chevronUp, chevronDown }}
         />
         <SessionDisplay
           time={length.length}
           onChange={changeLength}
           modificator={{ INCREASE, DECREASE }}
+          buttons={{ chevronUp, chevronDown }}
         />
       </div>
       <TimerDisplay time={length.timer} stage={stage} />
-      <TimerButtons onStart={startTimer} onReset={reset} />
+      <TimerButtons
+        onStart={startTimer}
+        onReset={reset}
+        resetSymbol={resetSymbol}
+        playSymbol={runningId ? pauseSymbol : playSymbol}
+      />
     </div>
   );
 }
