@@ -8,10 +8,10 @@ import './App.css';
 
 function App() {
   const [length, setLength] = useState({
-    length: 5,
-    timer: 5,
+    length: 1500,
+    timer: 1500,
   });
-  const [breakLength, setBreakLength] = useState(3);
+  const [breakLength, setBreakLength] = useState(300);
   const [runningId, setRunningId] = useState(0);
   const [stage, setStage] = useState('Session');
 
@@ -67,7 +67,6 @@ function App() {
 
     if (!runningId) {
       const timeoutId = setInterval(() => {
-        console.log(timer, stage)
         timer -= 1;
         setLength({
           ...length,
@@ -84,7 +83,7 @@ function App() {
       clearInterval(runningId);
       setRunningId(0);
     }
-  }, [length, runningId, switchTimer, stage]);
+  }, [length, runningId, switchTimer]);
 
   const reset = useCallback(() => {
     audioSignal.current.currentTime = 0;
@@ -99,7 +98,7 @@ function App() {
       timer: 1500,
     });
     setBreakLength(300);
-    setStage('Session');
+    // setStage('Session');
   }, [runningId, audioSignal]);
 
   return (
