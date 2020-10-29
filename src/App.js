@@ -98,7 +98,7 @@ function App() {
       timer: 1500,
     });
     setBreakLength(300);
-    // setStage('Session');
+    setStage('Session');
   }, [runningId, audioSignal]);
 
   return (
