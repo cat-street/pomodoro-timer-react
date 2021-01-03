@@ -17,10 +17,10 @@ import './vendor/fonts.css';
 
 function App() {
   const [length, setLength] = useState({
-    length: 1500,
-    timer: 1500,
+    length: 120,
+    timer: 120,
   });
-  const [breakLength, setBreakLength] = useState(300);
+  const [breakLength, setBreakLength] = useState(120);
   const [runningId, setRunningId] = useState(0);
   const [stage, setStage] = useState('Session');
 
