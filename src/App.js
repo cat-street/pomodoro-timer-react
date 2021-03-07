@@ -14,13 +14,14 @@ import {
 import audio from './assets/audio.mp3';
 import './App.css';
 import './vendor/fonts.css';
+import * as time from './const';
 
 function App() {
   const [length, setLength] = useState({
-    length: 120,
-    timer: 120,
+    length: time.mainTime,
+    timer: time.mainTime,
   });
-  const [breakLength, setBreakLength] = useState(120);
+  const [breakLength, setBreakLength] = useState(time.breakTime);
   const [runningId, setRunningId] = useState(0);
   const [stage, setStage] = useState('Session');
 
@@ -113,10 +114,10 @@ function App() {
       setRunningId(0);
     }
     setLength({
-      length: 1500,
-      timer: 1500,
+      length: time.mainTime,
+      timer: time.mainTime,
     });
-    setBreakLength(300);
+    setBreakLength(time.breakTime);
     setStage('Session');
   }, [runningId, audioSignal]);
 
